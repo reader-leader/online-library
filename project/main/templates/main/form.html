@@ -1,11 +1,21 @@
 {% extends 'main/base.html' %}
-{%load static%}
-{% block title %}
-{{title}}
-{% endblock %}
+{% block title %}Form{% endblock %}
 
 {% block content %}
-  <form action="" method = "POST">
-    <input type = 'submit' name="submit">
-  </form>
+<div id="page">
+<div style="clear: both;">&nbsp;</div>
+<div class="container">
+  <h2>Add your work</h2>
+    <div style="clear: both;">&nbsp;</div>
+  {% if submitted %}
+  {% else %}
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+     <input type="submit" class="btn btn-dark" value = "Submit" >
+   </form>
+  {% endif %}
+  </div>
+</div>
 {% endblock %}

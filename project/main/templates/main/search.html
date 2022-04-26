@@ -1,0 +1,43 @@
+{% extends 'main/base.html' %}
+{% block title %}Search{% endblock %}
+
+{% block content %}
+<div style="clear: both;">&nbsp;</div>
+<div class="container">
+
+  {% if searched %}
+   <h1>Search Results</h1>
+	<div style="clear: both;">&nbsp;</div>
+				<div class="row">
+    {% for i in fanfics %}
+    <div id="content">
+
+						  <div class="col-md">
+							<h2 class="title"><a href="#">{{i}}</a></h2>
+<!-- ЭТО ЕСЛИ СОБИРАЕШЬСЯ ПИСАТЬ ИМЯ АВТОРА И ДАТУ		<p class="meta">Posted by <a href="#">Someone</a> on November 10, 2011
+							&nbsp;&bull;&nbsp; <a href="#" class="comments">Comments (64)</a> &nbsp;&bull;&nbsp; <a href="#" class="permalink">Full article</a></p> -->
+						<div class="entry">
+							<p><img src="images/img03.jpg" width="186" height="186" alt="" class="alignleft border" /></p>
+
+							<h4 class="title"><a href="#">Title: {{i.title}}</a></h4>
+							<h4 class="title">Author: <a href="#">{{i.author}}</a></h4>
+							<h4 class="title">Date: <a href="#">{{i.created_date}}</a></h4>
+						    <h4 class="title">Category: <a href="#">{{i.category}}</a></h4>
+							<h4 class="title">Status: <a href="#">{{i.status}}</a></h4>
+							<h4 class="title">Genre: {% for g in i.genre.all %} <a href="#">{{ g }}</a>{% endfor %}</h4>
+						    <h4 class="title">Description: <a href="#">{{i.description}}</a></h4>
+
+
+				<div style="clear: both;">&nbsp;</div>
+							</div>
+						 </div>
+						</div>
+{% endfor %}
+</div>
+    {% else %}
+    <h1> nothing found</h1>
+  {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %}
+{% block title %}Search{% endblock %}
+
+{% block content %}
+
+<div class="container">
+{% for genre in genres %}
+   {{ genre }}:
+   {% for g in genre.search_tags.all %}
+       {{ g.title }} <br>
+   {% endfor %}
+{% endfor %}
+
+</div>
+
+{% endblock %}
