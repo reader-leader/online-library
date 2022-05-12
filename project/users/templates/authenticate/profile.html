@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+{% block title %}Change password{% endblock %}
+
+{% block content %}
+  <div id="page">
+
+    <div class="profile-content">
+                <div class="row">
+                  <div class="col-md-6 ml-auto mr-auto">
+                     <div class="profile">
+                          <div class="avatar" >
+                              <img src="https://cdn4.iconfinder.com/data/icons/minimal-8/24/profile-512.png" width="300" height="300" alt="Circle Image" class="img-raised rounded-circle img-fluid">
+                          </div>
+                          <div class="name">
+                              <h2 class="title">{{ user.username }}</h2>
+
+                </div>
+                      </div>
+                  </div>
+                </div>
+                <div class="description text-center" >
+                    <p><a href="{% url 'add_profile' %}">Update profile</a></p>
+                    <p>{{profile.bio}}</p>
+                    <h4></h4>
+                </div>
+        <div class="row">
+          <div class="col-md-6 ml-auto mr-auto">
+
+            </div>
+            </div>
+  </div>
+  </div>
+{% endblock %}

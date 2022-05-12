@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+{% block title %}Search{% endblock %}
+
+{% block content %}
+  <article>
+ <div id="page">
+  		<div id="page-bgtop">
+  			<div id="page-bgbtm">
+  				<div id="content">
+  					<div class="post">
+  						<p class="title" style="font-size: 2em">{{post.title}}</p>
+                        <br>
+  						<p class="meta"  style="font-size: 1em">Posted by <a href="#">Someone</a> {{post.created_date}}
+  							&nbsp;&bull;&nbsp; <a href="#" class="comments">Comments (64)</a> &nbsp;&bull;&nbsp;</p>
+                <h3 class="text">{{post.description}}</h3>
+          	</div>
+  				</div>
+</div>
+</div>
+    <ul class="colorlib-bubbles">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    	</div>
+
+        <div class="article-body">
+            <i class="bi bi-bookmarks-fill"></i>
+        </div>
+    </article>
+{% endblock %}

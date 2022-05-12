@@ -3,10 +3,22 @@
 
 {% block content %}
 <div style="clear: both;">&nbsp;</div>
-<div class="container">
 
+	<div id="sidebar">
+		<ul>
+			<form class = "d-flex" method="POST" action="{% url 'search' %}">
+				{% csrf_token %}
+				<input type="text" class="search-box form-control" placeholder="Search&hellip;" name="searched">
+<!--										  <i class="material-icons">&#xE8B6;</i>-->
+
+			</form>
+
+		</ul>
+		</div>
+<div class="container">
   {% if searched %}
-   <h1>Search Results</h1>
+
+   <h2 style="font-size: 2em">Search Results</h2>
 	<div style="clear: both;">&nbsp;</div>
 				<div class="row">
     {% for i in fanfics %}
@@ -17,7 +29,6 @@
 <!-- ЭТО ЕСЛИ СОБИРАЕШЬСЯ ПИСАТЬ ИМЯ АВТОРА И ДАТУ		<p class="meta">Posted by <a href="#">Someone</a> on November 10, 2011
 							&nbsp;&bull;&nbsp; <a href="#" class="comments">Comments (64)</a> &nbsp;&bull;&nbsp; <a href="#" class="permalink">Full article</a></p> -->
 						<div class="entry">
-							<p><img src="images/img03.jpg" width="186" height="186" alt="" class="alignleft border" /></p>
 
 							<h4 class="title"><a href="#">Title: {{i.title}}</a></h4>
 							<h4 class="title">Author: <a href="#">{{i.author}}</a></h4>

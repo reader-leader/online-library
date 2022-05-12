@@ -1,12 +1,13 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
-# Create your views here.
 from . models import *
 from . form import NovelForm
+
 
 def index(request):
     ff = Fanfics.objects.all()
     return render(request, 'main/index.html', {'ff': ff})
+
 
 def search(request):
     if request.method == "POST":
@@ -16,6 +17,7 @@ def search(request):
     else:
         return render(request, 'main/search.html')
 
+
 def tag(request):
     genres = Genre.objects.all()
 
@@ -24,10 +26,24 @@ def tag(request):
      }
     return render(request, 'main/search_genre.html', context)
 
+
 def tables(request):
     tables = User.objects.all()
     # novels = Novel.objects.all()
     # return render(request, 'main/table.html', {'tables': tables, 'novels': novels})
+
+
+def favorites(request):
+    user = request.user
+    fav = user.favorites.all()
+    return render(request, 'main/favorites.html', {'fav': fav})
+
+
+def fanfic_detail(request, id):
+    post = get_object_or_404(Fanfics, pk=id)
+    post.favorites.add(request.user)
+    return render(request, 'main/details.html', {'post': post})
+
 
 def form(request):
     submitted = False

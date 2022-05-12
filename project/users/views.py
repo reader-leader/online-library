@@ -1,24 +1,68 @@
-from django.shortcuts import render, redirect
-from .forms import UserRegisterForm
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.http import Http404
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+
+from .forms import NewUserForm, UpdateProfileForm
+from .models import Profile
 
 
-
-def register(request):
+def login_user(request):
     if request.method == "POST":
-        form = UserRegisterForm(request.POST)
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('/')
+        else:
+            messages.success(request, "There was an error")
+            return redirect('login')
+    return render(request, 'authenticate/login.html')
+
+
+def register_user(request):
+    if request.method == "POST":
+        form = NewUserForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, f'Hi {username}, your account was created successfully')
-            return redirect('home')
+            user = form.save()
+            login(request, user)
+            messages.success(request, "Registration successful.")
+            return redirect('/')
+        else:
+            messages.success(request, "Unsuccessful registration. Invalid information.")
+            return redirect('register')
+    form = NewUserForm()
+    return render(request, 'authenticate/register.html', {'register_form': form})
+
+
+def logout_request(request):
+    logout(request)
+    messages.info(request, "You have successfully logged out.")
+    return redirect('/')
+
+
+def add_profile(request):
+    submitted = False
+    if request.method == "POST":
+        forms = UpdateProfileForm(request.POST, instance=request.user)
+        if forms.is_valid():
+            forms.save()
+        return redirect('/', 'submitted=True')
     else:
-        form = UserRegisterForm()
+        forms = Profile()
+        if 'submitted' in request.GET:
+            submitted = True
+    return render(request, 'authenticate/add_profile.html', {'form': forms, 'submitted': submitted})
 
-    return render(request, 'users/register.html', {'form': form})
 
+def user_profile(request):
+    profile = Profile.objects.all()
+    return render(request, 'authenticate/profile.html', {'profile': profile})
 
-@login_required()
-def profile(request):
-    return render(request, 'users/profile.html')
+def contact_us(request):
+    return render(request, 'authenticate/contact_us.html')
+

@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+{% block title %}Add profile{% endblock %}
+
+{% block content %}
+<div class="main-w3layouts wrapper">
+		<h2>update profile page</h2>
+		<div class="main-agileinfo">
+			<div class="agileits-top">
+    <div style="clear: both;">&nbsp;</div>
+  {% if submitted %}
+  {% else %}
+  <form action="" method="post">
+    {% csrf_token %}
+    <input class="text" type="text" name="username" placeholder="Username" required="">
+	  {{form s.user}}
+	  <input class="text" type="text" name="username" placeholder="biography" required="">
+	  {{forms.bio}}
+     <input type="submit" class="btn btn-dark" value = "Submit" >
+   </form>
+  {% endif %}
+  </div>
+</div>
+{% endblock %}

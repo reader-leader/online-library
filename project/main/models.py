@@ -1,7 +1,9 @@
+from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 
 
-class User(models.Model):
+class Users(models.Model):
 
     objects = models.Manager()
     name = models.CharField(max_length=200, null=True)
@@ -11,6 +13,8 @@ class User(models.Model):
 
     def __str__(self):
         return self.name
+
+
 class Novel(models.Model):
     objects = models.Manager()
 
@@ -25,6 +29,8 @@ class Novel(models.Model):
     description = models.CharField(max_length=500, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     category = models.CharField(max_length=200, null=True, choices=CATEGORY)
+
+
     def __str__(self):
         return self.title
 
@@ -84,10 +90,16 @@ class Fanfics(models.Model):
     description = models.CharField(max_length=500, null=True)
     status = models.CharField(max_length=50, null=True, choices=STATUS)
     genre = models.ManyToManyField(Genre, blank=True)
+    favorites = models.ManyToManyField(User, related_name='favorites', blank=True, auto_created=True)
+
+    #slug = models.SlugField(max_length=250, unique_for_date='publish')
 
     class Meta:
         ordering = ['title']
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('fanfic_detail', args=[str(self.title)])
 

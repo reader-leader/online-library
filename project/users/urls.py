@@ -1,10 +1,14 @@
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path
+
 from . import views
-from django.contrib.auth import views as auth_view
 
 urlpatterns = [
-    path('register/'),
-    path('profile/'),
-    path('login/'),
-    path('logout/'),
+    path('login_user/', views.login_user, name='login'),
+    path('logout_request/', views.logout_request, name="logout"),
+    path('register_user/', views.register_user, name='register'),
+    path('user_profile/', views.user_profile, name='user_profile'),
+    path('contact_us/', views.contact_us, name='contact'),
+    path('user_profile/', views.user_profile, name='profile'),
+    path('add_profile/', views.add_profile, name='add_profile'),
 ]
