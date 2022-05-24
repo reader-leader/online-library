@@ -1,17 +1,18 @@
 {% extends 'main/base.html' %}
+{% load static %}
 {% block title %}Search{% endblock %}
-
+<link rel="stylesheet" type="text/css" href="{% static 'css/favorites.css' %}">
 {% block content %}
 <div class="post">
-            <h2 class="title"><a href="#">Favorites </a></h2>
+            <h2 class="title"><a href="#">My fanfics </a></h2>
           </div>
 <div id="content">
      {% for i in fav %}
 				<article class="card">
           <div class="post">
               <h3>{{i.title}}</h3>
-            <p class="meta">Posted by <a href="{{ fav.get_absolute_url }}">  {{i.author}}</a> on {{post.created_date}}
-              &nbsp;&bull;&nbsp; <a href="{% url 'fanfic_detail' i.id %}" class="permalink">Full read</a></p>
+            <p class="meta">Posted by <a href="{{ post.get_absolute_url }}">  {{i.author}}</a> on {{post.created_date}}
+              &nbsp;&bull;&nbsp; <a href="#" class="comments">Comments (64)</a> &nbsp;&bull;&nbsp; <a href="{% url 'fanfic_detail' i.id %}" class="permalink">Full read</a></p>
             <p>...</p>
 
           </div>

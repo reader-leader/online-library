@@ -22,22 +22,21 @@
 	<div style="clear: both;">&nbsp;</div>
 				<div class="row">
     {% for i in fanfics %}
-    <div id="content">
-
-						  <div class="col-md">
-							<h2 class="title"><a href="#">{{i}}</a></h2>
-<!-- ЭТО ЕСЛИ СОБИРАЕШЬСЯ ПИСАТЬ ИМЯ АВТОРА И ДАТУ		<p class="meta">Posted by <a href="#">Someone</a> on November 10, 2011
-							&nbsp;&bull;&nbsp; <a href="#" class="comments">Comments (64)</a> &nbsp;&bull;&nbsp; <a href="#" class="permalink">Full article</a></p> -->
+    <div id="content"> <div class="col-md">
+							<h2 class="title"><a href="{% url 'fanfic_detail' i.id %}">{{i.title}}</a></h2>
+<p class="meta">Posted by <a href="#">{{i.author}}</a> {{i.created_date}}
+							&nbsp;&bull;&nbsp; <a href="#" class="comments">Comments (64)</a> &nbsp;&bull;&nbsp; <a href="#" class="permalink"><div class="container">
+  <span id="rateMe2"  class="empty-stars"></span>
+</div>
+</a></p>
 						<div class="entry">
 
-							<h4 class="title"><a href="#">Title: {{i.title}}</a></h4>
 							<h4 class="title">Author: <a href="#">{{i.author}}</a></h4>
 							<h4 class="title">Date: <a href="#">{{i.created_date}}</a></h4>
 						    <h4 class="title">Category: <a href="#">{{i.category}}</a></h4>
 							<h4 class="title">Status: <a href="#">{{i.status}}</a></h4>
 							<h4 class="title">Genre: {% for g in i.genre.all %} <a href="#">{{ g }}</a>{% endfor %}</h4>
 						    <h4 class="title">Description: <a href="#">{{i.description}}</a></h4>
-
 
 				<div style="clear: both;">&nbsp;</div>
 							</div>

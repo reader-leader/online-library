@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+{% block title %}Search{% endblock %}
+
+{% block content %}
+<div style="clear: both;">&nbsp;</div>
+
+<div class="container">
+
+
+
+	<div style="clear: both;">&nbsp;</div>
+				<div class="row">
+    <div id="content">
+
+						  <div class="col-md">
+							<h2 class="title"><a href="{% url 'fanfic_detail' recent_story.id %}">{{recent_story.title}} </a></h2>
+
+
+<!-- ЭТО ЕСЛИ СОБИРАЕШЬСЯ ПИСАТЬ ИМЯ АВТОРА И ДАТУ		<p class="meta">Posted by <a href="#">Someone</a> on November 10, 2011
+							&nbsp;&bull;&nbsp; <a href="#" class="comments">Comments (64)</a> &nbsp;&bull;&nbsp; <a href="#" class="permalink">Full article</a></p> -->
+						 </div>
+						</div>
+</div>
+
+</div>
+
+{% endblock %}

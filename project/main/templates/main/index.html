@@ -2,19 +2,7 @@
 {% block title %}Index{% endblock %}
 
 {% block content %}
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Landing page for Online Library</title>
-<link href='http://fonts.googleapis.com/css?family=Nova+Mono' rel='stylesheet' type='text/css' />
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-</head>
-<body>
 	<!-- end #menu -->
 	<div id="sidebar">
 
@@ -49,15 +37,14 @@
 
 						  <div class="col-md">
 							<h2 class="title"><a href="{% url 'fanfic_detail' i.id %}">{{i.title}}</a></h2>
+
 <p class="meta">Posted by <a href="#">{{i.author}}</a> {{i.created_date}}
-							&nbsp;&bull;&nbsp; <a href="#" class="comments">Comments (64)</a> &nbsp;&bull;&nbsp; <a href="#" class="permalink"><div class="container">
+							&nbsp; &nbsp;&bull;&nbsp; <a href="#" class="permalink"><div class="container">
   <span id="rateMe2"  class="empty-stars"></span>
 </div>
 </a></p>
 						<div class="entry">
 
-							<h4 class="title">Author: <a href="#">{{i.author}}</a></h4>
-							<h4 class="title">Date: <a href="#">{{i.created_date}}</a></h4>
 						    <h4 class="title">Category: <a href="#">{{i.category}}</a></h4>
 							<h4 class="title">Status: <a href="#">{{i.status}}</a></h4>
 							<h4 class="title">Genre: {% for g in i.genre.all %} <a href="#">{{ g }}</a>{% endfor %}</h4>
@@ -100,8 +87,6 @@
 	<p>All rights reserved 2022 <a href="{% url 'contact' %}">Contact us</a></p>
 </div>
 <!-- end #footer -->
-</body>
-</html>
 
 {% endblock %}
 

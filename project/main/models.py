@@ -3,6 +3,7 @@ from django.db import models
 from django.urls import reverse
 
 
+
 class Users(models.Model):
 
     objects = models.Manager()
@@ -83,22 +84,24 @@ class Fanfics(models.Model):
 
 
     title = models.CharField(max_length=200, null=True)
-    author = models.CharField(max_length=200, null=True)
-    # author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True)
+    #author = models.CharField(max_length=200, null=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, auto_created=True)
     created_date = models.DateTimeField(auto_now_add=True, null=True)
     category = models.CharField(max_length=200, null=True, choices=CATEGORY)
     description = models.CharField(max_length=500, null=True)
     status = models.CharField(max_length=50, null=True, choices=STATUS)
     genre = models.ManyToManyField(Genre, blank=True)
-    favorites = models.ManyToManyField(User, related_name='favorites', blank=True, auto_created=True)
-
-    #slug = models.SlugField(max_length=250, unique_for_date='publish')
-
+    favorites = models.ManyToManyField(User, related_name='favorites', blank=True, editable=False)
+    my_fan = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='my_fan')
+    text = models.CharField(max_length=1000, null=True)
     class Meta:
         ordering = ['title']
 
     def __str__(self):
         return self.title
+
+    def queryset(request):
+        return Fanfics.objects.filter(author=request.author)
 
     def get_absolute_url(self):
         return reverse('fanfic_detail', args=[str(self.title)])

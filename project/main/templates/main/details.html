@@ -2,6 +2,55 @@
 {% block title %}Search{% endblock %}
 
 {% block content %}
+<style>/* COLUMNS */
+
+.col {
+ display: block;
+ float:left;
+ margin: 1% 0 1% 1.6%;
+}
+
+.col:first-of-type {
+  margin-left: 0;
+}
+
+.container{
+  width: 100%;
+  max-width: 940px;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+}
+/* GENERAL STYLES */
+
+.pagination{
+  padding: 30px 0;
+}
+
+.pagination ul{
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.pagination a{
+  display: inline-block;
+  padding: 10px 18px;
+  color: #222;
+}
+
+.p1 a.is-active{
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 100%;
+  color: black;
+}
+
+.p1 a:first-of-type, .p1 a:last-of-type, .p1 .is-active{
+
+  border-color: black;
+  color: black;
+  font-weight: bold;
+}</style>
   <article>
  <div id="page">
   		<div id="page-bgtop">
@@ -10,11 +59,30 @@
   					<div class="post">
   						<p class="title" style="font-size: 2em">{{post.title}}</p>
                         <br>
-  						<p class="meta"  style="font-size: 1em">Posted by <a href="#">Someone</a> {{post.created_date}}
+  						<p class="meta"  style="font-size: 1em">Posted by <a href="#">{{post.author}}</a> {{post.created_date}}
   							&nbsp;&bull;&nbsp; <a href="#" class="comments">Comments (64)</a> &nbsp;&bull;&nbsp;</p>
                 <h3 class="text">{{post.description}}</h3>
+                        <br>
+                        <article class="card">
+                         <h4 class="text">{{post.text}}</h4>
+                        </article>
           	</div>
+<div class="container">
+    <div class="pagination p1">
+      <ul>
+        <a href="#"><li><</li></a>
+        <a href="#"><li>1</li></a>
+        <a href="#"><li>2</li></a>
+        <a href="#"><li>3</li></a>
+        <a href="#"><li>4</li></a>
+        <a href="#"><li>5</li></a>
+        <a class="is-active" href="#"><li>6</li></a>
+        <a href="#"><li>></li></a>
+      </ul>
+    </div>
+  </div>
   				</div>
+
 </div>
 </div>
     <ul class="colorlib-bubbles">
@@ -32,7 +100,12 @@
     	</div>
 
         <div class="article-body">
-            <i class="bi bi-bookmarks-fill"></i>
+            <form method='POST' action="">
+        {% csrf_token %}
+                {{f}}
+                <a href="{% url 'favorites' %}"><input class="btn btn-success" type="button" value="+"></a>
+
+    </form>
         </div>
     </article>
 {% endblock %}
